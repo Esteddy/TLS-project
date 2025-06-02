@@ -7,10 +7,36 @@
         <style>
 
             @font-face {
-                font-family: Georgia, 'Times New Roman', Times, serif;
-                src: url(assets/font/Rock-Slayers.otf);
+                font-family: "Stroke-Medium";
+                src:
+                  local(Rock-Slayers),
+                  url(assets/font/Stroke_Medium.otf) format(otf);
                 font-size: small;
+                font-style: normal;
                 
+            }
+
+            body {
+                font-family: "Stroke-Medium", serif;
+                position: relative;
+                margin: 0;
+                padding: 20px;
+                height: 625px;
+            }
+
+            body::before {
+                content: "";
+                background-image: url('assets/background/main-screen.jpg');
+                background-size: cover;
+                background-attachment: fixed;
+                position: absolute;
+                max-width: 422px;
+                max-height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: -1;
             }
 
             .character-block {
@@ -78,20 +104,16 @@
                 width: 40px;
             }
 
-            .coin p {
-                justify-content: inherit;
-            }
-
             .menu {
                 display: flex;
                 position: fixed;
                 bottom: 0px;
                 left: 0px;
-                width: 422px;
+                width: 100%;
                 height: 50px;
-                padding: 0 30px;
-                padding-top: 5px;
-                padding-bottom: 5px;
+                padding: 0 25px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 gap: calc((422px - (5 * 40px) - 30px) / 4);
                 background: #1a1a1a;
                 color: white;
@@ -102,34 +124,14 @@
                 display: flex;
                 width: 30px;
                 height: 30px;
+                padding-left: 2.5px;
                 justify-content: center;
-                align-items: center;
             }
 
             .menu img + p {
+                display: flex;
                 font-size: 10px;
-            }
-
-            body {
-                position: relative;
-                margin: 0;
-                padding: 20px;
-                height: 625px;
-            }
-
-            body::before {
-                content: "";
-                background-image: url('assets/background/main-screen.jpg');
-                background-size: cover;
-                background-attachment: fixed;
-                position: absolute;
-                max-width: 422px;
-                max-height: 625px;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: -1;
+                justify-content: center;
             }
 
         </style>
@@ -149,8 +151,8 @@
             </div>
         </div>
 
-        <div><img src="assets/icons/coin.png" alt="coin" class="coin">
-            <p>Монеты</p>
+        <div>
+            <img src="assets/icons/coin.png" alt="coin" class="coin">
         </div>
 
         <div class="menu">
