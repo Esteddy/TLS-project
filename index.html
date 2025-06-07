@@ -10,9 +10,7 @@
                 font-family: "Stroke-Medium";
                 src:
                   local(Stroke-Medium),
-                  url(font/Stroke-Medium.otf) format('otf');
-                font-size: small;
-                font-style: normal;
+                  url(/font/Stroke-Medium.otf) format('otf');
                 
             }
 
@@ -37,6 +35,8 @@
                 bottom: 0;
                 z-index: -1;
             }
+
+            /* Информация об игроке */
 
             .character-block {
                 position: fixed;
@@ -94,6 +94,8 @@
                 transition: width 0.3s ease;
             }
 
+            /* Монеты */
+
             .coin {
                 display: flex;
                 position: fixed;
@@ -102,6 +104,19 @@
                 height: 40px;
                 width: 40px;
             }
+
+            /* Кнопка с музыкой */
+
+            #musicControl {
+                position: fixed;
+                top: 100px;
+                left: 10px;
+                padding: 10px;
+                width: 50px;
+                height: 50px;
+            }
+
+            /* Нижнее меню */
 
             .menu {
                 display: flex;
@@ -134,12 +149,14 @@
             }
 
             p {
-                font-family: "Stroke-Medium";
+                font-family: "Stroke-Medium", sans-serif;
             }
 
         </style>
     </head>
     <body>
+        
+        <!-- Информация об игроке -->
 
         <div class="character-block">
             <div class="character-header">
@@ -154,9 +171,25 @@
             </div>
         </div>
 
+        <!-- Монета -->
+
         <div>
             <img src="assets/icons/coin.png" alt="coin" class="coin">
         </div>
+
+        <!-- Кнопка с музыкой -->
+
+        <img
+          id="musicControl"
+          src="assets/icons/music.png"
+          alt="music-on"
+          >
+
+        <audio id="bgMusic" loop>
+            <source src="assets/music/krasivaya-napryajennaya-melodiya-2327.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Нижнее меню -->
 
         <div class="menu">
             <div><img src="assets/icons/inventory.png" alt="inventory">
@@ -175,6 +208,27 @@
                 <p>Друзья</p>
             </div>
         </div>
+
+            <!-- Скрипт музыки -->
+
+    <script>
+        const toggle = document.getElementById('musicControl');
+        const music = document.getElementById('bgMusic');
+
+        musicControl.addEventListener('click', () => {
+          if (music.paused) {
+            music.play()
+              .then(() => {
+                musicControl.src = 'assets/icons/music.png'
+              })
+              .catch(e => console.log('Ошибка:', e));
+            } else {
+              music.pause();
+              musicControl.src = 'assets/icons/music.png';
+            }
+        });
+
+    </script>
 
     </body>
 
