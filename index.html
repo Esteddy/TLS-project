@@ -9,9 +9,80 @@
             @font-face {
                 font-family: "Stroke-Medium";
                 src:
-                  local(Stroke-Medium),
-                  url(/font/Stroke-Medium.otf) format('otf');
+                  url(font/Stroke-Medium.otf) format('otf');
                 
+            }
+
+            /* Стили прелоадера */
+
+            .preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                z-index: 9999;
+                transition: opacity 0.5 ease;
+            }
+
+            /* Контейнер для текста */
+
+            .text-loader {
+                position: relative;
+                margin-bottom: 30px;
+            }
+
+            /* Стили анимированного текста */
+
+            .loading-text {
+                font-size: 4rem;
+                font-weight: bold;
+                color: transparent;
+                -webkit-text-stroke: 2px #3498db;
+                position: relative;
+            }
+
+            /* Эффект закрашивания */
+
+            .text-fill {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 100%;
+                color: #3498db;
+                overflow: hidden;
+                white-space: nowrap;
+                transition: width 0.3s ease-out;
+            }
+
+            /* Прогресс-бар */
+
+            .progress-container {
+                width: 300px;
+                height: 4px;
+                background: #f0f0f0;
+                border-radius: 2px;
+                overflow: hidden;
+            }
+
+            .progress-bar {
+                height: 100%;
+                width: 0;
+                background: #3498db;
+                transition: width 0.3s ease-out;
+            }
+
+            /* Состояние скрытия */
+
+            .preloader.hidden {
+                opacity: 0;
+                pointer-events: none;
             }
 
             body {
@@ -34,6 +105,10 @@
                 right: 0;
                 bottom: 0;
                 z-index: -1;
+            }
+
+            main {
+                font-family: 'Stroke-Medium';
             }
 
             /* Информация об игроке */
@@ -148,13 +223,26 @@
                 justify-content: center;
             }
 
-            p {
-                font-family: "Stroke-Medium", sans-serif;
-            }
-
         </style>
     </head>
+
     <body>
+
+        <!-- Прелоадер -->
+
+        <div class="preloader" id="preloader">
+            <div class="text-loader">
+                <div class="loading-text" id="loadingText">The Lost Shadow</div>
+                <div class="text-fill" id="textFill">The Lost Shadow</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+
+        <main>
         
         <!-- Информация об игроке -->
 
@@ -185,7 +273,7 @@
           alt="music-on"
           >
 
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic" loop autoplay>
             <source src="assets/music/krasivaya-napryajennaya-melodiya-2327.mp3" type="audio/mpeg">
         </audio>
 
@@ -209,9 +297,80 @@
             </div>
         </div>
 
-            <!-- Скрипт музыки -->
+        </main>
+
+        <!-- Скрипты -->
 
     <script>
+
+        //Прелоадер
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloder = document.getElementById('preloader');
+            const textFill = document.getElementById('textFill');
+            const progressBar = document.getElementById('progressBar');
+            const startTime = performance.now();
+            let lastProgress = 0;
+
+            // Функция обновления прогресса
+
+            function updateProgress(progress) {
+                progress = Math.min(Math.max(progress, lastProgress), 1);
+                lastProgress = progress;
+
+                // Обновление заливки текста и прогресс-бара
+
+                textFill.style.width = `${progress * 100}%`;
+                progressBar.style.width = `${progress * 100}%`; 
+
+                return progress;
+            };
+
+            // Комбинированный трекинг прогресса
+
+            function trackProgress() {
+                // 1. Базовый прогресс по времени (20% максимум)
+                const timeProgress = Math.min((performance.now() - startTime) / 2000, 0.2)
+
+                // 2. Прогресс загрузки ресурсов (80% максимум)
+                const resources = window.performance.getEntriesByType('resource');
+                let resourceProgress = 0;
+
+                if (resources.length > 0) {
+                    resourceProgress = resources.filter(r => r.duration > 0).length / resources.length * 0.8;
+                }
+
+                // Общий прогресс
+                const totalProgress = timeProgress + resourceProgress;
+                updateProgress(totalProgress);
+
+                // Продолжаем обновление, если не достигли 100%
+                if (totalProgress < 0.99) {
+                    requestAnimationFrame(trackProgress);
+                }
+            }
+
+            // Обработчик полной загрузки
+            window.addEventListener('load', () => {
+                // Устанавливаем 100% прогресс
+                updateProgress(1);
+
+                // Плавно скрываем прелоадер через 0.5 сек
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                }, 500);
+            });
+
+            // Начало отслеживания с небольшой задержкой
+            setTimeout(trackProgress, 100);
+
+            // Инициализация текста
+            const loadingText = document.getElementById('loadingText');
+            textFill.textContent = loadingText.textContent
+        });
+
+        //Музыка
+        
         const toggle = document.getElementById('musicControl');
         const music = document.getElementById('bgMusic');
 
