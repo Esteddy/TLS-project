@@ -22,15 +22,15 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 422px;
                 height: 100%;
-                background: white;
+                background-image: url(assets/background/preloader-img.jpg);
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
                 z-index: 9999;
-                transition: opacity 0.5 ease;
+                transition: opacity 0.5s ease;
             }
 
             /* Контейнер для текста */
@@ -43,10 +43,12 @@
             /* Стили анимированного текста */
 
             .loading-text {
+                position: fixed;
+                left: 40px;
                 font-size: 4rem;
                 font-weight: bold;
                 color: transparent;
-                -webkit-text-stroke: 2px #3498db;
+                -webkit-text-stroke: 2px darkgrey;
                 position: relative;
             }
 
@@ -58,7 +60,7 @@
                 left: 0;
                 width: 0%;
                 height: 100%;
-                color: #3498db;
+                color: black;
                 overflow: hidden;
                 white-space: nowrap;
                 transition: width 0.3s ease-out;
@@ -77,7 +79,7 @@
             .progress-bar {
                 height: 100%;
                 width: 0;
-                background: #3498db;
+                background: black;
                 transition: width 0.3s ease-out;
             }
 
@@ -200,11 +202,11 @@
                 left: 0px;
                 width: 422px;
                 height: 50px;
-                padding: 0 25px;
-                padding-top: 10px;
-                padding-bottom: 10px;
+                padding: 10px 32px 10px 32px;
                 gap: calc((422px - (5 * 50px) - 30px) / 4);
-                background: #1a1a1a;
+                background: rgba(0, 0, 0, 0.5);
+                -webkit-backdrop-filter: blur(1px);
+                backdrop-filter: blur(1px);
                 color: white;
                 overflow: hidden;
             }
