@@ -92,6 +92,7 @@
 
             body {
                 font-family: 'Stroke';
+                font-size: 10px;
                 position: relative;
                 margin: 0;
                 padding: 20px;
@@ -103,7 +104,7 @@
                 display: flex;
                 background-image: url('assets/background/main-screen.jpg');
                 min-width: max-content;
-                min-height: 100%;
+                min-height: 1000%;
                 background-size: cover;
                 background-attachment: fixed;
                 position: absolute;
@@ -206,8 +207,8 @@
                 padding: 10px 20px 10px 32px;
                 gap: calc((422px - (5 * 50px) - 30px) / 4);
                 background: rgba(0, 0, 0, 0.5);
-                -webkit-backdrop-filter: blur(1px);
-                backdrop-filter: blur(1px);
+                -webkit-backdrop-filter: blur(1.5px);
+                backdrop-filter: blur(1.5px);
                 color: white;
                 overflow: hidden;
             }
@@ -220,16 +221,12 @@
                 justify-content: center;
             }
 
-            .menu img + p {
+            .menu img + a {
                 display: flex;
-                font-size: 10px;
+                width: 30px;
+                height: 30px;
                 justify-content: center;
-            }
-
-            .menu a {
-                font-size: 10px;
-                color: white;
-                text-decoration: none;
+                align-items: center;
             }
 
         </style>
@@ -294,10 +291,10 @@
                 <p>Инветарь</p>
             </div>
             <div>
-                <img src="assets/icons/dices.png" alt="dices">
                 <a href="dices.html">
-                <p>Кости</p>
+                <img src="assets/icons/dices.png" alt="dices">
                 </a>
+                <p>Кости</p>
             </div>
             <div>
                 <img src="assets/icons/pve.png" alt="pve">
