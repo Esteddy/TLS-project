@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Кости</title>
+        <style>
+
+            body::before {
+                content: "";
+                display: flex;
+                background-image: url('assets/background/dices-page-background.jpg');
+                min-width: max-content;
+                min-height: 100%;
+                background-size: cover;
+                background-attachment: fixed;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: -1;
+            }
+
+            #musicControl {
+                position: fixed;
+                top: 100px;
+                left: 10px;
+                padding: 10px;
+                width: 50px;
+                height: 50px;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <main>
+
+            <img
+          id="musicControl"
+          src="assets/icons/music.png"
+          alt="music-on"
+          >
+
+        <audio id="bgMusic" loop autoplay>
+            <source src="assets/music/dices-theme.mp3" type="audio/mpeg">
+        </audio>
+
+        </main>
+
+        <script>
+            
+            const toggle = document.getElementById('musicControl');
+        const music = document.getElementById('bgMusic');
+
+        musicControl.addEventListener('click', () => {
+          if (music.paused) {
+            music.play()
+              .then(() => {
+                musicControl.src = 'assets/icons/music.png'
+              })
+              .catch(e => console.log('Ошибка:', e));
+            } else {
+              music.pause();
+              musicControl.src = 'assets/icons/music.png';
+            }
+        });
+
+        </script>
+
+
