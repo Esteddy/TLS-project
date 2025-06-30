@@ -6,12 +6,31 @@
         <title>Кости</title>
         <style>
 
+            @font-face {
+                font-family: "Stroke";
+                src:
+                  url(font/Stroke.otf) format('opentype');
+                font-weight: normal;
+                font-style: normal;
+                font-display: swap;
+                
+            }
+
+            body {
+                font-family: 'Stroke';
+                font-size: 10px;
+                position: relative;
+                margin: 0;
+                padding: 20px;
+                height: 720px;
+            }
+
             body::before {
                 content: "";
                 display: flex;
                 background-image: url('assets/background/dices-page-background.jpg');
                 min-width: max-content;
-                min-height: 100%;
+                min-height: 1000%;
                 background-size: cover;
                 background-attachment: fixed;
                 position: absolute;
@@ -31,6 +50,38 @@
                 height: 50px;
             }
 
+            .menu {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: 50px;
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
+                padding: 10px 20px 10px 32px;
+                background: rgba(0, 0, 0, 0.5);
+                -webkit-backdrop-filter: blur(1.5px);
+                backdrop-filter: blur(1.5px);
+                color: white;
+                overflow: hidden;
+            }
+
+            .menu img {
+                display: flex;
+                width: 30px;
+                height: 30px;
+                padding-left: 2.5px;
+                justify-content: center;
+            }
+
+            .menu img + a {
+                display: flex;
+                width: 30px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+
         </style>
 
     </head>
@@ -48,6 +99,31 @@
         <audio id="bgMusic" loop autoplay>
             <source src="assets/music/dices-theme.mp3" type="audio/mpeg">
         </audio>
+
+        <div class="menu">
+            <div>
+                <img src="assets/icons/inventory.png" alt="inventory">
+                <p>Инветарь</p>
+            </div>
+            <div>
+                <a href="index.html">
+                <img src="assets/icons/fire-place.png" alt="fire-place">
+                </a>
+                <p>Костёр</p>
+            </div>
+            <div>
+                <img src="assets/icons/pve.png" alt="pve">
+                <p>Карта</p>
+            </div>
+            <div>
+                <img src="assets/icons/clans.png" alt="clans">
+                <p>Кланы</p>
+            </div>
+            <div>
+                <img src="assets/icons/friends.png" alt="friends">
+                <p>Друзья</p>
+            </div>
+        </div>
 
         </main>
 
