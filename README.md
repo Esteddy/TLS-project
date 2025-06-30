@@ -1,1 +1,1 @@
-# mini-app-project
+#tg-mimi-app
